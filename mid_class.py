@@ -1,5 +1,5 @@
 import time
-
+import ccxt
 
 class mid_class():
     # 初始化所需要的信息，如交易所密钥信息、初始化账户信息等
@@ -27,8 +27,25 @@ class mid_class():
         except:
             return False
 
-    def get_ticker(self):
-        pass
+    def get_ticker(self,symbol):
+        self.HighOf24h = '___'
+        self.LowOf24h = '___'
+        self.Sell = '___'
+        self.Last = '___'
+        self.Bid = '___'
+        self.Ask = '___'
+        self.Volume = '___'
+        try:
+            self.ticker = self.exchange.fetch_ticker(symbol)
+            self.Low = self.ticker['low']
+            self.High = self.ticker['high']
+            self.Bid = self.ticker['low']
+            self.Ask = self.ticker['ask']
+            self.Volume=self.ticker['volume']
+            return True
+        except:
+            return False
+
     def get_depth(self):
         pass
     def get_ohlc_data(self):
