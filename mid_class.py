@@ -1,5 +1,5 @@
 import time
-import ccxt
+import tool.tool as tool
 
 class mid_class():
     # 初始化所需要的信息，如交易所密钥信息、初始化账户信息等
@@ -28,8 +28,8 @@ class mid_class():
             return False
 
     def get_ticker(self,symbol):
-        self.HighOf24h = '___'
-        self.LowOf24h = '___'
+        self.High = '___'
+        self.Low = '___'
         self.Sell = '___'
         self.Last = '___'
         self.Bid = '___'
@@ -37,6 +37,7 @@ class mid_class():
         self.Volume = '___'
         try:
             self.ticker = self.exchange.fetch_ticker(symbol)
+            self.ticker = tool.wrap_ticker(self.ticker)
             self.Low = self.ticker['low']
             self.High = self.ticker['high']
             self.Bid = self.ticker['low']
